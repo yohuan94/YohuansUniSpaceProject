@@ -1,0 +1,734 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100italic);
+@import url(https://fonts.googleapis.com/css?family=Six+Caps);
+
+html, body{
+	height: 1500000px;
+	overflow-x:hidden;
+	width: 100%;
+}
+body {
+	background-color: black;
+	margin: 0 auto;
+	font-family: Lato;
+}
+
+.backstars{
+	position:fixed;
+	background-image: url(images/starsp1.png);
+	background-position: center 0;
+	background-repeat: repeat;
+	width:100%; 
+	height:76000px;
+	z-index:-2
+}
+.forstars{
+	position:fixed;
+	background-image: url(images/starsp2.png);
+	background-position: center 0;
+	background-repeat: repeat;
+	width:100%;
+	height:121000px;
+	z-index:-2
+}
+
+hr {
+	height: 2px;
+	border: 0;
+	background-color: rgba(230,230,230,1);
+}
+
+h1{
+	font-weight:500;
+}
+
+#infoButton{
+	background-color: rgba(255,255,255,0.2);
+	margin: 0 auto;
+	padding-top: 30vw;
+	padding-bottom: 1vw;
+	width: 10vw;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	font-size: 1.5vw;
+}
+
+#infoButton:hover{
+	background-color: rgba(255,255,255,0.4);
+	color: rgba(255,255,255,1);
+}
+
+#hideButton{
+	background-color: rgba(255,255,255,0.2);
+	margin: 1px auto;
+	width: 10vw;
+	height: 20px;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+#hideButton:hover{
+	background-color: rgba(255,255,255,0.4);
+	color: rgba(255,255,255,1);
+}
+
+#sunInfo h3 {
+	padding: 10px;
+	text-align: center;
+	background-color: rgba(255,255,255,0.2);
+	color: white;
+	margin: 1px 0 0 0;
+	cursor: pointer;
+}
+
+#sunInfo h3:hover{
+	background-color: rgba(255,255,255,0.4);
+	color: rgba(255,255,255,1);
+}
+
+.hiddenContent h2{
+	margin-right:6px;
+	margin-top:12px;
+	margin-bottom:0px;
+	font-size: 13px;
+	font-family: Lato;
+	color: rgba(250,250,250,1);
+}
+
+.hiddenContent {
+	display: none;
+	background-color: rgba(255,255,255,0.1);
+	padding:20px;
+	color: rgba(220,220,220,1);
+	font-size: 13px;
+	text-align: justify;
+}
+
+#sunInfo{
+	position: absolute;
+	top: 30vw;
+	left: 15%;
+	width: 70%;
+	z-index: 0;
+}
+
+.paddingTop{
+	background-color: rgba(255,255,255,0.2);
+	position: absolute;
+	top: 0px;
+	left: 15%;
+	width: 70%;
+	height: 30vw;
+	z-index: 0;
+}
+
+.tab_content h1 {
+	margin: 0;
+	font-size: 24px;
+	color: rgba(250,250,250,1);
+	font-weight: bold;
+	font-family: Lato;
+	text-align: center;
+}
+
+.tab_content h2 {
+	margin-right:6px;
+	margin-top:12px;
+	margin-bottom:0px;
+	float: left;
+	font-size: 13px;
+	font-family: Lato;
+	color: rgba(250,250,250,1);
+}
+
+.tab_content h3 {
+	padding-top:30px;
+	margin: 0;
+	font-size: 18px;
+	font-family: Lato;
+	color: rgba(250,250,250,1);
+}
+
+.centerH3Text {
+	text-align: center;
+}
+
+p {
+	margin-top:12px;
+	margin-bottom:0px;
+	color: rgba(220,220,220,1);
+	font-size: 13px;
+}
+
+nav {
+	position: fixed;
+	width: 40%;
+	height: 80%;
+	min-height: 500px;
+	min-width: 55px;
+	max-width: 100px;
+	top: 10%;
+	z-index: 4;
+	background-position: center;
+	background-size: 3px auto;
+	background-image: url(images/line.png);
+	background-repeat: repeat-y;
+}
+
+.menuText{
+	color: rgba(230,230,230,1);
+	font-size: 90%;
+	position: absolute;
+	padding-left: 25%;
+	text-shadow: 1px 1px 2px black;
+}
+
+.menuSun{
+	position: absolute;
+	top: 0%;
+	width: 100%;
+	height: 4%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 108%;
+	background-image: url(images/sun_menu.png);
+	background-repeat: no-repeat;
+	overflow: visible;
+}
+
+.menuSun:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuMercury{
+	position: absolute;
+	top: 4.5%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/mercury_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuMercury:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuVenus{
+	position: absolute;
+	top: 9%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/venus_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuVenus:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuEarth{
+	position: absolute;
+	top: 13.5%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/earth_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuEarth:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuMars{
+	position: absolute;
+	top: 18%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/mars_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuMars:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuJupiter{
+	position: absolute;
+	top: 30%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/jupiter_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuJupiter:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuSaturn{
+	position: absolute;
+	top: 45%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/saturn_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuSaturn:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuUranus{
+	position: absolute;
+	top: 60%;
+	width: 100%;
+	height: 7%;
+	max-height: 100px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/uranus_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuUranus:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+.menuNeptune{
+	position: absolute;
+	top: 80%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/neptune_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuNeptune:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+
+.menuPluto{
+	position: absolute;
+	bottom: 0%;
+	width: 100%;
+	height: 3.5%;
+	max-height: 50px;
+	cursor: pointer;
+	cursor: hand;
+	background-position: center;
+	background-size: auto 100%;
+	background-image: url(images/pluto_menu.png);
+	background-repeat: no-repeat;
+}
+
+.menuPluto:hover{
+	filter: contrast(2);
+	-webkit-filter: contrast(2);
+	-webkit-filter: brightness(2);
+}
+
+[class*="distanceIndicator-"]{
+	height: 30px;
+	width: auto;
+	top: calc( 50% - 16px );
+	right: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 15px;
+	line-height: 30px;
+	color: rgba(230,230,230,1);
+	background-color: rgba(255,255,255,0.2);
+	position: fixed;
+	z-index: 10;
+	cursor: pointer;
+	cursor: hand;
+}
+
+[class*="distanceIndicator-"]:hover{
+	background-color: rgba(255,255,255,0.3);
+}
+
+.distanceInfo{
+	height: 20px;
+	width: auto;
+	top: calc( 50% - 46px );
+	right: 0px;
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 12px;
+	line-height: 20px;
+	color: rgba(230,230,230,1);
+	position: fixed;
+	z-index: 9;
+	cursor: pointer;
+	cursor: hand;
+}
+
+
+
+#sun{
+	position: absolute;
+	width: 100%;
+	height: 30.15vw;
+	background-repeat: no-repeat;
+	background-position: center-top;
+	background-image: url("images/sunBanner.png");
+	background-size: 100% 100%;	
+	z-index: 1;
+}
+
+#titleImg{
+	font-family: 'Six Caps';
+	font-size: 14vw;
+	font-weight: normal;
+	text-shadow: 3px 3px 5px black;
+	margin: 0;
+	color: rgba(240,240,240,0.9);
+	text-align: center;
+}
+
+#mercury  {
+	width: 24px;
+	height: 24px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/mercury.png);
+}
+
+#mercury:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(220,220,220,1));
+    filter:         drop-shadow(0px 0px 5px rgba(220,220,220,1)); 
+}
+
+#venus  {
+	width: 61px;
+	height: 61px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/venus.png);
+}
+
+#venus:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(210,180,100,1));
+    filter:         drop-shadow(0px 0px 5px rgba(210,180,100,1)); 
+}
+
+#earth {
+	width: 64px;
+	height: 64px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/earth.png);
+}
+
+#earth:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(150,150,255,1));
+    filter:         drop-shadow(0px 0px 5px rgba(150,150,255,1)); 
+}
+
+#mars  {
+	width: 34px;
+	height: 34px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/mars.png);
+}
+
+#mars:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(220,150,80,1));
+    filter:         drop-shadow(0px 0px 5px rgba(220,150,80,1)); 
+}
+
+#jupiter  {
+	width: 699px;
+	height: 699px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/jupiter.png);
+}
+
+#jupiter:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(180,150,100,1));
+    filter:         drop-shadow(0px 0px 5px rgba(180,150,100,1)); 
+}
+
+#saturn  {
+	width: 1368px;
+	height: 684px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/saturn.png);
+}
+
+#saturn:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(180,150,150,1));
+    filter:         drop-shadow(0px 0px 5px rgba(180,150,150,1)); 
+}
+
+#uranus  {
+	width: 254px;
+	height: 508px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/uranus.png);
+}
+
+#uranus:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(160,200,210,1));
+    filter:         drop-shadow(0px 0px 5px rgba(160,200,210,1)); 
+}
+
+.planettextboxEX-7 .planettextbox-7{
+	top:300px;
+}
+
+#neptune  {
+	width: 246px;
+	height: 246px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/neptune.png);
+}
+
+#neptune:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(100,100,200,1));
+    filter:         drop-shadow(0px 0px 5px rgba(100,100,200,1)); 
+}
+
+#pluto  {
+	width: 13px;
+	height: 13px;
+	margin: 0 auto;
+	position: relative;
+    z-index: 3;
+	cursor: pointer;
+	cursor: hand;
+	background-size: 100% 100%;
+	background-image: url(images/pluto.png);
+}
+
+#pluto:hover{
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(180,150,100,1));
+    filter:         drop-shadow(0px 0px 5px rgba(180,150,100,1)); 
+}
+
+.planetContent {
+	position: relative;
+	width: auto;
+}
+
+[class*="planettextbox-"]{
+	left: 50%;
+	top: 50px;
+	background-color: rgba(255,255,255,0.2);
+	width: 0px;
+	height: 400px;
+	padding-left: 250px;
+	position: absolute;
+    z-index: 1;
+}
+
+[class*="planettextboxEX-"]{
+	top: 50px;
+	left: calc( 50% + 250px );
+	height: auto;
+	width:calc( 50% - 300px );
+	min-height: 400px;
+	min-width: 0;
+	float: left;
+	background-color: rgba(255,255,255,0.2);
+	position: absolute;
+	z-index: 5;
+}
+
+[class*="planetlabel-"]{
+	color: rgba(230,230,230,1);
+	left: 50%;
+	width: calc(50% - 250px);
+	min-width: 200px;
+	padding-bottom: 5px;
+	text-align: right;
+	position: absolute;
+	z-index: 2;
+	cursor: pointer;
+	cursor: hand;
+}
+
+[class*="planetlabel-"]:hover{
+	color: rgba(255,255,255,1);
+	text-shadow: 0 0 5px rgba(255,255,255,1);
+}
+
+[class*="planetlabel-"]:active{
+	color: rgba(100,100,100,1);
+	text-shadow: 0 0 1px rgba(100,100,100,0);
+}
+
+[class*="buttoneffect-"] {
+	font-size: 30px;
+	text-align: center;
+	font-weight: bolder;
+	line-height: 26px;
+	background-color: rgba(255,255,255,0.2);
+	color: rgba(220,220,220,1);
+	width: 35px;
+	height: 35px;
+	top: -35px;
+	right: 0px;
+	position: absolute;
+	z-index: 4;
+	cursor: pointer;
+	cursor: hand;
+}
+
+[class*="buttoneffect-"]:hover{
+	color: rgba(255,255,255,1);
+	background-color: rgba(255,255,255,0.3);
+	text-shadow: 0 0 5px rgba(255,255,255,1);
+}
+
+[class*="buttoneffect-"]:active{
+	color: rgba(100,100,100,1);
+	text-shadow: 0 0 1px rgba(100,100,100,0);
+}
+
+.tab_container {
+	width: 100%;
+	float: left;
+	clear: both;
+	position: relative;
+	overflow-x: hidden;
+	
+}
+
+.tab_content {
+	padding: 20px;
+}
+
+ul.tabs li.active {
+	background-color: rgba(255,255,255,0);
+	color: rgba(255,255,255,1);
+}
+
+ul.tabs li :hover {
+	background-color: rgba(255,255,255,0.2);
+	color: rgba(255,255,255,1);
+}
+
+ul.tabs li {
+	background-color: rgba(255,255,255,0.12);
+    float: left;
+    width: calc(100% / 3);
+	line-height: 35px;
+    text-align: center;
+	text-transform: uppercase;
+	list-style-type: none;
+	overflow-x: hidden;
+}
+
+.tabs{
+	height: 35px;
+	padding: 0;
+	margin: 0;
+    clear: both;
+}
+
+.tabs li a {
+	margin: 0;
+	color: rgba(210,210,210,1);
+	display: block;
+	font-size: 80%;
+    text-transform: uppercase;
+    text-decoration: none;
+}

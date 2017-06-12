@@ -1,0 +1,1798 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="styles.css" rel="stylesheet" />
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<title>SotSS</title>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	$("html, body").animate({ scrollTop: $('#sun').offset().top }, 100);
+
+	$(window).bind('scroll',function(e){
+   		parallaxScroll();
+   	});
+ 
+   	function parallaxScroll(){
+   		var scrolledY = $(window).scrollTop();
+		$('.backstars').css('top','-'+((scrolledY*0.05))+'px');
+		$('.forstars').css('top','-'+((scrolledY*0.08))+'px');
+   	}
+	
+	$('div#nav h1').hide();
+	$('nav').hide();
+	
+	$('div#nav').mouseover(function() {
+		$(this).find('h1').stop().fadeIn(100);
+	})
+	
+	$('div#nav').mouseout(function() {
+		$(this).find('h1').stop().fadeOut(100);
+	})
+
+	$('#titleImg').hide();	
+	$('#titleImg').delay(1000).fadeIn(1200);
+	$('nav').delay(1000).fadeIn(1200);
+	
+	$('.paddingTop, #sunInfo, #infoButton').hide();
+	$('#infoButton').delay(1500).slideDown(500);
+	
+	$("#infoButton").click(function() {
+		$('#infoButton').stop().slideUp(500);
+		$('.paddingTop').stop().slideDown(1000);
+		$('#sunInfo').stop().delay(1000).slideDown(750);
+	});
+	
+	$("#hideButton").click(function() {
+		$('#sunInfo').stop().slideUp(750);
+		$('.paddingTop').stop().delay(750).slideUp(1000);
+		$('#infoButton').stop().delay(1000).slideDown(500);
+	});
+	
+	$('#auto').slideDown();
+	$('h3').click(function() {
+		$('.hiddenContent').stop().slideUp(300);
+		$(this).next().stop().slideDown();
+	});
+	
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 200) { 
+			$('#titleImg').fadeOut(1000);
+		}
+	});
+	
+	
+	$('nav div').click(function(e) {
+		e.preventDefault();
+		var image = $(e.target.getAttribute('href'));
+		centrePlanet(image);
+	});
+	
+	function centrePlanet(image) {
+		var imageOffset = image.offset().top;
+		var imageHeight = image.height();
+		var windowHeight = $( window ).height();
+		var distance = imageOffset - ((windowHeight/2) - (imageHeight/2));
+		
+		$('html,body').stop().animate({ scrollTop: distance }, { duration: 2000 })
+	}
+	
+	function centrePlanetTab(image) {
+		var imageOffset = image.offset().top;
+		var imageHeight = image.height();
+		var windowHeight = $( window ).height();
+		var distance = imageOffset - ((windowHeight/2) - (imageHeight/2));
+		$('html,body').stop().animate({ scrollTop: distance }, { duration: 800 })
+	}
+	
+	$(".tab_content").hide();
+	$("ul.tabs").each(function() {
+		$(this).find('li:first').addClass("active");
+		$(this).nextAll('.tab_container').find('.tab_content:first').show();
+	});
+
+	$("ul.tabs li a").click(function() {
+		var cTab = $(this).closest('li');
+		cTab.siblings('li').removeClass("active");
+		cTab.addClass("active");
+		cTab.closest('ul.tabs').nextAll('.tab_container:first').find('.tab_content').hide(); 
+
+		var activeTab = $(this).attr("href");
+		$(activeTab).fadeIn();
+		return false;
+	});
+	
+	$("*[class*='planetlabel']").css({
+		'position' : 'absolute',
+		'left' : '50%',
+		'top' : '50%',
+		'margin-top' : -$("*[class*='planetlabel']").outerHeight()/2
+	});
+	
+	$(".menuText").css({
+			'left' : '50%',
+			'top' : '50%',
+			'margin-top' : -$(".menuText").outerHeight()/2
+	});
+	
+	$('[class*="planettextbox-"], [class*="buttoneffect-"], [class*="planettextboxEX-"]').hide();
+	
+	$("#mercury, .planetlabel-1, .buttoneffect-1").click(function(e){
+		var event = e;
+		if ($(".planettextbox-1, .buttoneffect-1, .planettextboxEX-1").is(":hidden") && !$("#mercury").is(':animated')) {
+			$("#mercury").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-1").stop().hide(400);
+			$(".buttoneffect-1, .planettextboxEX-1").stop().delay(400).show(600);
+			$(".planettextbox-1").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-1").stop().fadeOut(200);
+			$(".buttoneffect-1, .planettextboxEX-1").stop().hide(200);
+			$("#mercury").stop().animate({ width: "24px", height: "24px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-1").stop().show(400);
+		}
+	});
+
+	$("#venus, .planetlabel-2, .buttoneffect-2").click(function(e){
+		var event = e;
+		if ($(".planettextbox-2, .buttoneffect-2, .planettextboxEX-2").is(":hidden")) {
+			$("#venus").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-2").stop().hide(400);
+			$(".buttoneffect-2, .planettextboxEX-2").stop().delay(400).show(600);
+			$(".planettextbox-2").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-2").stop().fadeOut(200);
+			$(".buttoneffect-2, .planettextboxEX-2").stop().hide(200);
+			$("#venus").stop().animate({ width: "61px", height: "61px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-2").stop().show(400);
+		}
+	});
+
+	$("#earth, .planetlabel-3, .buttoneffect-3").click(function(e){
+		var event = e;
+		if ($(".planettextbox-3, .buttoneffect-3, .planettextboxEX-3").is(":hidden")) {
+			$("#earth").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-3").stop().hide(400);
+			$(".buttoneffect-3, .planettextboxEX-3").stop().delay(400).show(600);
+			$(".planettextbox-3").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-3").stop().fadeOut(200);
+			$(".buttoneffect-3, .planettextboxEX-3").stop().hide(200);
+			$("#earth").stop().animate({ width: "64px", height: "64px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-3").stop().show(400);
+		}
+	});	
+	
+	$("#mars, .planetlabel-4, .buttoneffect-4").click(function(e){
+		var event = e;
+		if ($(".planettextbox-4, .buttoneffect-4, .planettextboxEX-4").is(":hidden")) {
+			$("#mars").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-4").stop().hide(400);
+			$(".buttoneffect-4, .planettextboxEX-4").stop().delay(400).show(600);
+			$(".planettextbox-4").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-4").stop().fadeOut(200);
+			$(".buttoneffect-4, .planettextboxEX-4").stop().hide(200);
+			$("#mars").stop().animate({ width: "34px", height: "34px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-4").stop().show(400);
+		}
+	});
+
+	$("#jupiter, .planetlabel-5, .buttoneffect-5").click(function(e){
+		var event = e;
+		if ($(".planettextbox-5, .buttoneffect-5, .planettextboxEX-5").is(":hidden")) {
+			$("#jupiter").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-5").stop().hide(400);
+			$(".buttoneffect-5, .planettextboxEX-5").stop().delay(400).show(600);
+			$(".planettextbox-5").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-5").stop().fadeOut(200);
+			$(".buttoneffect-5, .planettextboxEX-5").stop().hide(200);
+			$("#jupiter").stop().animate({ width: "699px", height: "699px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-5").stop().show(400);
+		}
+	});	
+
+	$("#saturn, .planetlabel-6, .buttoneffect-6").click(function(e){
+		var event = e;
+		if ($(".planettextbox-6, .buttoneffect-6, .planettextboxEX-6").is(":hidden")) {
+			$("#saturn").stop().animate({ width: "1000px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-6").stop().hide(400);
+			$(".buttoneffect-6, .planettextboxEX-6").stop().delay(400).show(600);
+			$(".planettextbox-6").stop().delay(400).fadeIn(600);
+		}
+		else {
+			$(".planettextbox-6").stop().fadeOut(200);
+			$(".buttoneffect-6, .planettextboxEX-6").stop().hide(200);
+			$("#saturn").stop().animate({ width: "1368px", height: "684px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-6").stop().show(400);
+		}
+	});	
+	
+	$("#uranus, .planetlabel-7, .buttoneffect-7").click(function(e){
+		var event = e;
+		if ($(".planettextbox-7, .buttoneffect-7, .planettextboxEX-7").is(":hidden")) {
+			$("#uranus").stop().animate({ width: "500px", height: "1000px"}, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-7").stop().hide(400);
+			$(".buttoneffect-7, .planettextboxEX-7").stop().delay(400).show(600);
+			$(".planettextbox-7").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-7").stop().fadeOut(200);
+			$(".buttoneffect-7, .planettextboxEX-7").stop().hide(200);
+			$("#uranus").stop().animate({ width: "254px", height: "508px"}, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-7").stop().show(400);
+		}
+	});	
+	
+	$("#neptune, .planetlabel-8, .buttoneffect-8").click(function(e){
+		var event = e;
+		if ($(".planettextbox-8, .buttoneffect-8, .planettextboxEX-8").is(":hidden")) {
+			$("#neptune").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-8").stop().hide(400);
+			$(".buttoneffect-8, .planettextboxEX-8").stop().delay(400).show(600);
+			$(".planettextbox-8").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-8").stop().fadeOut(200);
+			$(".buttoneffect-8, .planettextboxEX-8").stop().hide(200);
+			$("#neptune").stop().animate({ width: "246px", height: "246px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-8").stop().show(400);
+		}
+	});
+
+	$("#pluto, .planetlabel-9, .buttoneffect-9").click(function(e){
+		var event = e;
+		if ($(".planettextbox-9, .buttoneffect-9, .planettextboxEX-9").is(":hidden")) {
+			$("#pluto").stop().animate({ width: "500px", height: "500px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-9").stop().hide(400);
+			$(".buttoneffect-9, .planettextboxEX-9").stop().delay(400).show(600);
+			$(".planettextbox-9").stop().delay(400).fadeIn(600);
+		} 
+		else {
+			$(".planettextbox-9").stop().fadeOut(200);
+			$(".buttoneffect-9, .planettextboxEX-9").stop().hide(200);
+			$("#pluto").stop().animate({ width: "13px", height: "13px" }, {
+				duration: 400,
+				complete: function() {
+					var image = $(event.target).parents(".planetCenter");
+					centrePlanetTab(image);
+				}});
+			$(".planetlabel-9").stop().show(400);
+		}
+	});
+	
+	var position = $(".distanceIndicator-Mile").offset();
+	$(".distanceIndicator-Mile").html(position.top);
+
+	$(window).scroll(function () { 
+		$('.distanceIndicator-Mile').text("↤ " + $ (window).scrollTop() * 2485 + " mi");
+	});
+	
+	var position = $(".distanceIndicator-KM").offset();
+	$(".distanceIndicator-KM").html(position.top);
+
+	$(window).scroll(function () { 
+		$('.distanceIndicator-KM').text("↤ " + $ (window).scrollTop() * 4000 + " km");
+	});
+	
+	$('.distanceInfo, .distanceIndicator-Mile').hide()
+	
+	$(".distanceIndicator-KM, .distanceIndicator-Mile").mouseover(function(){
+		$(".distanceInfo").stop().fadeIn(150);
+		});
+		
+	$(".distanceIndicator-KM, .distanceIndicator-Mile").mouseleave(function(){
+		$(".distanceInfo").stop().fadeOut(150);
+		});
+		
+	$(".distanceIndicator-Mile, .distanceIndicator-KM").click(function(e){
+		var event = e;
+		if ($(".distanceIndicator-Mile").is(":hidden")) {
+			$(".distanceIndicator-KM").stop().fadeOut(200);
+			$(".distanceIndicator-Mile").stop().fadeIn(200);
+		} 
+		else {
+			$(".distanceIndicator-Mile").stop().fadeOut(200);
+			$(".distanceIndicator-KM").stop().fadeIn(200);
+		}
+	});	
+	
+	
+
+});
+</script>
+</head>
+<body>
+	
+	<div class="backstars"></div>
+	<div class="forstars"></div>
+	
+	<nav>
+	
+		<div id="nav" class="menuSun" href="#sun">
+			<h1 class="menuText" href="#sun">Sun</h1></div>
+		<div id="nav" class="menuMercury" href="#mercury">
+			<h1 class="menuText" href="#mercury">Mercury</h1> </div>
+		<div id="nav" class="menuVenus" href="#venus">
+			<h1 class="menuText" href="#venus">Venus</h1> </div>
+		<div id="nav" class="menuEarth" href="#earth">
+			<h1 class="menuText" href="#earth">Earth</h1> </div>
+		<div id="nav" class="menuMars" href="#mars">
+			<h1 class="menuText" href="#mars">Mars</h1> </div>
+		<div id="nav" class="menuJupiter" href="#jupiter">
+			<h1 class="menuText" href="#jupiter">Jupiter</h1> </div>
+		<div id="nav" class="menuSaturn" href="#saturn">
+			<h1 class="menuText" href="#saturn">Saturn</h1> </div>
+		<div id="nav" class="menuUranus" href="#uranus">
+			<h1 class="menuText"  href="#uranus">Uranus</h1></div>
+		<div id="nav" class="menuNeptune" href="#neptune">
+			<h1 class="menuText" href="#neptune">Neptune</h1> </div>
+		<div id="nav" class="menuPluto" href="#pluto">
+			<h1 class="menuText" href="#pluto">Pluto</h1> </div>
+		
+	</nav
+	
+	<section>
+		<div id="sun">
+			<h1 id="titleImg">Scale of the Solar System</h1>
+		</div>
+		
+		<div id="infoButton">Show Info</div>
+		
+		<div class="paddingTop"></div>
+		<div id="sunInfo">
+			<h3>About the Sun</h3>
+			<div id="auto" class="hiddenContent">
+			<p>The sun is the closest star to Earth, at a mean distance from our planet of 149.60 million kilometers. This distance is known as an astronomical unit (abbreviated A.U.), and sets the scale for measuring distances all across the solar system. The sun, a huge sphere of mostly ionized gas, supports life on Earth. The connection and interactions between the sun and Earth drive the seasons, ocean currents, weather and climate. It is the center of our solar system.
+
+			About one million Earths could fit inside the sun. It is held together by gravitational attraction, producing immense pressure and temperature at its core. The sun has six regions - the core, the radiative zone, and the convective zone in the interior; the visible surface (the photosphere); the chromosphere; and the outermost region, the corona. The sun has no solid surface.</p>
+			
+			<p>At the core, the temperature is about 15 million degrees Celsius, which is sufficient to sustain thermonuclear fusion. The energy produced in the core powers the sun and produces essentially all the heat and light we receive on Earth. Energy from the core is carried outward by radiation, which bounces around the radiative zone, taking about 170,000 years to get from the core to the convective zone. The temperature drops below 2 million degrees Celsius in the convective zone, where large bubbles of hot plasma (a soup of ionized atoms) move upwards.
+
+			The sun's surface - the photosphere - is a 500-kilometer-thick region, from which most of the sun's radiation escapes outward and is detected as the sunlight we observe here on Earth about eight minutes after it leaves the Sun. Sunspots in the photosphere are areas with strong magnetic fields that are cooler, and thus darker, than the surrounding region. Sunspot numbers fluctuate every 11 years as part of the sun's magnetic activity cycle. Also connected to this cycle are bright solar flares and huge coronal mass ejections that blast off the sun.
+
+			The temperature of the photosphere is about 5,500 degrees Celsius. Above the photosphere lie the tenuous chromosphere and the corona (crown). Visible light from these top regions is usually too weak to be seen against the brighter photosphere, but during total solar eclipses, when the Moon covers the photosphere, the chromosphere can be seen as a red rim around the sun while the corona forms a beautiful white crown with plasma streaming outward, forming the points of the crown. Above the photosphere, temperature increases with altitude, reaching as high as 2 million degrees Celsius . The source of coronal heating has been a scientific mystery for more than 50 years.</p>
+			
+			<h2>Radius:<h2><p>695,508 km (109.2 x that of Earth)<p>
+			<h2>Circumference:<h2><p>4,370,005.6 km (109.2 x that of Earth)<p>
+			<h2>Volume:<h2><p>1,409,272,569,059,860,000 km cubed (1,301,018.805 x that of Earth)<p>
+			<h2>Mass:<h2><p>1,989,100,000,000,000,000,000,000,000,000 kg (333,060.402 x that of Earth)<p>
+			<h2>Surface Area:<h2><p>6,078,747,774,547 km squared (11,917.607 x that of Earth)<p>
+			<h2>Gravity:<h2><p>274.0 m/s squared (27.96 x that of Earth)<p>
+			<h2>Escape Velocity:<h2><p>2,223,720 km/h (55.20 x that of Earth)<p>
+			<h2>Rotation Period:<h2><p>25.38 Earth Days (609.12 Hours)<p>
+			<h2>Surface Temperature:<h2><p>5,500°C <p>
+			<h2>Composition:<h2><p>92.1% Hydrogen, 7.8% Helium<p>
+			<h2>Age:<h2><p>4.6 Billion Years<p>
+			
+			</div>
+			<h3>Scale Info</h3>
+			<div class="hiddenContent">
+				<p>The size of every planet has been meticulously calculated to ensure that they are following the 1px = 200km scale to each other.</p>
+				<p> The distance between the planets has also been scaled to 1px=4000km.</p>
+			</div>
+
+			<h3>Sources and Links</h3>
+			<div class="hiddenContent">
+				<p>All images and information has been sourced from NASA in accordance with their <a href="http://www.nasa.gov/multimedia/guidelines/index.html" target="_blank">media usage guidlines</a>.</p>
+				<p>Group project for Macquarie University by William Hong 43599575 and Matthew Awkar 43675565.</a>.</p>
+			</div>
+
+			<div id="hideButton">Hide</div>
+		</div>
+		
+		<div class="distanceIndicator-Mile"></div>
+		
+		<div class="distanceIndicator-KM"></div>
+		
+		<div class="distanceInfo"> Distance from the Sun. </div>
+		
+		<div style="top: 14960px" class="planetContent planetCenter">
+		
+			<div id="mercury"></div>
+		
+			<div class="planetlabel-1">
+				<div style="font-size: 20px">Mercury</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			
+			<div class="planettextbox-1"></div>
+			<div class="planettextboxEX-1">
+				
+				<div class="buttoneffect-1">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab1">About</a></li>
+					<li><a href="#tab2">Stats</a></li>
+					<li><a href="#tab3">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">						
+						<h1>About Mercury</h1>
+						<p>Mercury is the closest planet to our Sun. It is named for the ancient Roman god of trade and profit. Mercury has the fastest orbit around the sun, and it completely circles our Sun every 88 days. Mercury is the smallest in the planet class in our solar system, if Earth were a baseball, Mercury would be a golf ball.</p>
+						
+						<h3>How is it on Mercury?</h3>
+						
+						<p>Imagine looking up at a Sun that is three times larger than what you see on Earth. That is how our Sun would look on Mercury. Because of Mercury's wild elliptical (egg-shaped) orbit and weird rotation, the morning Sun appears to rise briefly, set and rise again. The same thing happens in reverse at sunset.</p>
+
+						<p>Mercury is not as hot as you might think. Venus is actually hotter. The temperature on Mercury can change more than 1,000 degrees Fahrenheit (530 degrees Celsius) between night and day. There is very little air - atmosphere - to hold in the heat when the sun is not shining. The thin atmosphere also means meteors don't burn up, so Mercury is covered with craters. It looks a lot like our moon.</p>
+						
+						<p>There is no water on Mercury. But there might be a little ice in deep craters. Mercury has cliffs and valleys just like Earth. Some cliffs are a mile high.</p>
+						
+						<p>You would need very special spacesuit to visit Mercury. It would have to protect you from extreme heat and cold and dangerous radiation from the sun. Even NASA's MESSENGER spacecraft carried a special sunshade for protection as it explored Mercury from orbit.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Mercury is only about one third the size of Earth and has no moons</p>
+						
+						<p>It is a terrestrial planet that looks a lot like Earth's moon, scarred by meteorites. It also has a large metallic core that is about 80% of the planets radius, making it very heavy for its size</p>
+						
+						<p>Along with having the fastest orbit in the solar system, where it takes only 88 Earth days to do a complete circle around the Sun, it also takes 176 Earth days for the sun to rise and set on Mercury.</p>
+						
+						<p>Because of the lack of an atmosphere, it also has extreme temperatures that can range between, being 6 times hotter then the hottest place on Earth during the day and twice as cold as the coldest place on Earth during the night.</p>
+					</div>
+					<div id="tab2" class="tab_content">						
+						<h1>Numerical Information: Mercury</h1>
+						
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>57,909,227 km </p>
+						<h2>Imperial:</h2> 
+						<p>35,983,125 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>0.38709927 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>Earth is 1 A.U. </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>170,503 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>105,946 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>1.590 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>2,439.7 km </p>
+						<h2>Imperial:</h2> 
+						<p>1,516.0 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.3829 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>15,329.1 km </p>
+						<h2>Imperial:</h2> 
+						<p>9,525.1 miles</p>
+						
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>60,827,208,742 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>14,593,223,446 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>0.056 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>330,104,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>0.055 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>74,797,000 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>28,879,000 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.055 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>3.7 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>12.1 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.38G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>15,300 km/h</p>
+						<h2>Metric:</h2> 
+						<p>9,507 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>Escape Velocity of Earth is 25,030 mph</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>58.646</p>
+						<h2>Hours:</h2> 
+						<p>1407.5</p>
+						<h2>By Comparison:</h2> 
+						<p>58.81 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-173/427 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-279/801 °F</p>
+						<h2>By Comparison:</h2> 
+						<p>58.81 x Earth</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>None</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Terrestrial</p>	
+						<h2>Successive Sunrise:</h2> 
+						<p>175.97 Earth Days</p>
+						
+					</div>
+					<div id="tab3" class="tab_content">						
+						<h1>Moons Of Mercury</h1>
+						<p>Mercury has no known moons in orbit.</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+		<div style="top: 27500px" class="planetContent planetCenter">
+		
+			<div id="venus"></div>
+		
+			<div class="planetlabel-2">
+				<div style="font-size: 20px">Venus</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			
+			<div class="planettextbox-2"></div>
+			<div class="planettextboxEX-2">
+				
+				<div class="buttoneffect-2">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab5">About</a></li>
+					<li><a href="#tab6">Stats</a></li>
+					<li><a href="#tab7">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab5" class="tab_content">						
+						<h1>About Venus</h1>
+						<p>Venus is the second planet from our Sun. It is Earth's closest neighbor and the second brightest object in our night sky where only the moon is brighter. It is named for the Roman goddess of love and beauty. Even though it is so close to Earth, Venus is very mysterious. The surface is hidden beneath hot, poisonous air made up mostly of carbon dioxide. Scientists must use radar to 'see' through Venus' clouds. Venus has no moon and no rings.</p>
+						
+						<h3>How is it on Venus ?</h3>
+						
+						<p>Very Hot and confusing. To get to the surface of Venus, you would have to pass through clouds of sulfuric acid, hurricane-force winds and lightning.</p>
+
+						<p>On the ground, it would look like a very hazy, overcast day on Earth. Instead of cooling things down, the clouds on Venus reflect sunlight and trap heat - a lot like a greenhouse keeps plants warm. On Venus the greenhouse effect is out of control. It can get up to almost 900 degrees Fahrenheit (482 degrees Celcious). It gets hotter than Mercury and the air is thick and poisonous.
+						</p>
+						
+						<p>Venus' atmosphere is so heavy it would feel like you were deep in the ocean. On Venus, the pressure is so strong it would crush you. Even tough metal spacecraft are smashed after a few hours on the surface of Venus. Venus spins backwards so the Sun rises in the west and sets in the east. And because the planet rotates so sluggishly, a day on Venus is longer than it takes to go around the Sun.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>The cratered and volcanic surface of Venus is hidden beneath a thick blanket of poisonous and super hot gasses that can reach up to 480 degrees Celsius or 900 degrees Fahrenheit.</p>
+						
+						<p>Venus also has a retrograde rotation where it rotates the opposite way to all the other planets in the solar system so the sun rises in the west and sets in the east.</p>
+						
+						<p>It is nearly as big as Earth being 80% the size of Earth. It takes about 117 Earthdays for venus to complete 1 day and Venus takes 225 Earthdays to complete 1 full orbit around the sun. Like Mercury, Venus has no moons.</p>
+					</div>
+					<div id="tab6" class="tab_content">						
+						<h1>Numerical Information: Venus</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>108,209,475 km </p>
+						<h2>Imperial:</h2> 
+						<p>67,238,251 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>0.72333566 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>0.723 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>126,074 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>76,339 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>1.176 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>6,051.8 km </p>
+						<h2>Imperial:</h2> 
+						<p>3,760.4 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.9499 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>38,024.6 km </p>
+						<h2>Imperial:</h2> 
+						<p>23,627 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.9499 x Earth's</p>	
+						
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>928,415,345,893 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>222,738,686,740 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>0.857 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>4,867,320,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>0.815 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>460,234,317 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>177,697,463 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.902 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>8.87 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>29.1 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.91G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>37,296 km/h</p>
+						<h2>Metric:</h2> 
+						<p>23,175 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.926 x Earth's</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>243.018</p>
+						<h2>Hours:</h2> 
+						<p>5832.4 </p>
+						<h2>By Comparison:</h2> 
+						<p>243.68 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>462 °C</p>
+						<h2>Imperial:</h2> 
+						<p>864 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Carbon Dioxide (CO2), Nitrogen(N2)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Terrestrial</p>	
+					</div>
+					<div id="tab7" class="tab_content">						
+						<h1>Moons Of Venus</h1>
+						<p>Mercury has no known moons in orbit.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="top: 37800px" class="planetContent planetCenter">
+		
+			<div id="earth"></div>
+		
+			<div class="planetlabel-3">
+				<div style="font-size: 20px">Earth</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			
+			<div class="planettextbox-3"></div>
+			<div class="planettextboxEX-3">
+				
+				<div class="buttoneffect-3">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab9">About</a></li>
+					<li><a href="#tab10">Stats</a></li>
+					<li><a href="#tab11">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab9" class="tab_content">						
+						<h1>About Earth</h1>
+						<p>Earth, our home planet, is the third planet from the Sun and the fifth largest planet in our solar system. It is the only planet we know of where life exists which has one moon.</p>
+						
+
+						<p>In some ways, Earth is similar to Mercury, Venus and Mars. They are all hard, rocky planets or also known as terrestrial planets. All four have meteor impact craters from its ealier stages in the planets lifetime. Like Mars and Venus, Earth has volcanoes, mountains and valleys. But Earth is different in very important ways. Most of our planet is covered with water where the air is made of nitrogen, oxygen and a little carbon dioxide. Earth is home to people, plants and animals because it has both water and the right kind of atmospheric conditions.
+						</p>
+						
+						<p>Earth has one moon. It is the brightest and most familiar object in the night sky. In many ways, the moon is responsible for making Earth a great home for life, it gives Earth its many atmospheric weather conditions and sea tides which help support life on Earth.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>70% Of our world is covered in ocean, and earth is made up of 4 layers, which include the crust, the mantle, the outer core and the inner core.</p>
+						
+						<p>It is the only planet known to support life and is 4.5 billion years old. it is made up of 78% nitrogen, 21% oxygen, 1% other gasses which is a perfect balance for life on our planet.</p>
+						
+						<p>Like other terrestrial planets such as Mercury, Venus, and Mars, These planets are too small too have rings around them and they only have very few moons or none at all.</p>
+						
+						
+					</div>
+					<div id="tab10" class="tab_content">						
+						<h1>Numerical Information: Earth</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>149,598,262 km </p>
+						<h2>Imperial:</h2> 
+						<p>92,956,050</p>
+						<h2>Astronomical units:</h2> 
+						<p>1.000 A.U. </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>107,218 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>66,622 mph</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>6,371.00 km </p>
+						<h2>Imperial:</h2> 
+						<p>3,958.8 miles</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>40,030.2 km </p>
+						<h2>Imperial:</h2> 
+						<p>24,873.6 miles</p>						
+						
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>1,083,206,916,846 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>259,875,159,532 miles cubed</p>			
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>5,972,190,000,000,000,000,000,000 kg </p>						
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>510,064,472 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>196,936,994 square miles</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>9.80665 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>32.041 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>1G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>40,284 km/h</p>
+						<h2>Metric:</h2> 
+						<p>25,031 mph</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>0.99726968</p>
+						<h2>Hours:</h2> 
+						<p>23.934 </p>						
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p> -88/58 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-126/136 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Terrestrial</p>	
+					</div>
+					<div id="tab11" class="tab_content">						
+						<h1>Moons Of Earth</h1>
+						<h3>1 Moon</h3> 
+						<h3>Earth's Moon</h3> 
+						<h2>Orbit From Earth:</h2> 
+						<p>384,400 km or 238,855 miles</p>
+						<h2>Orbit Period:</h2> 
+						<p>27.322 Earth Days</p>
+						<h2>Equatorial Radius:</h2> 
+						<p>1737.5 km or 1079.6 miles</p>
+						<h2>Surface Gravity:</h2> 
+						<p>1.624 m/s squared</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div style="top: 57300px" class="planetContent planetCenter">
+		
+			<div id="mars"></div>
+		
+			<div class="planetlabel-4">
+				<div style="font-size: 20px">Mars</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			
+			<div class="planettextbox-4"></div>
+			<div class="planettextboxEX-4">
+				
+				<div class="buttoneffect-4">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab13">About</a></li>
+					<li><a href="#tab14">Stats</a></li>
+					<li><a href="#tab15">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab13" class="tab_content">						
+						<h1>About Mars</h1>
+						<p>Mars is the fourth planet from the Sun. It is also known as the 'Red Planet' because of its red soil. The soil on Mars is red because it contains iron oxide or rust. Mars is one of the brightest objects in the night skyknown since ancient times. The planet is named for the Roman God of War. It has two moons, Phobos (fear) and Deimos (panic). The moons get their scary names from the horses that pulled the chariot of the Greek god Ares.</p>
+						
+						<h3>How is it on Mars?</h3>
+						
+						<p>Mars is a rocky planet. It is dusty and dry. The sky would be hazy and red instead of blue. Sometimes giant dust storms cover the whole planet.</p>
+						
+						<p>Mars is a little like Earth, only smaller, drier and colder. There are places on Earth that are a little like Mars such as, Death Valley, Antarctica and volcanoes in Hawaii. Both planets have polar ice caps, volcanoes, canyons and four seasons, but the seasons on Mars are twice as long. But the thin air on Mars makes it a dangerous place for humans. It is mostly poisonous carbon dioxide. You would need a spacesuit to visit Mars. Recently, scientists found lots of frozen water just under the surface of Mars. This means astronauts who may visit Mars in the future will have plenty of water.</p>
+						
+						<p>On Mars, you would see two moons in the sky. They may be asteroids captured by Mars' gravity. Phobos is slowly moving towards Mars which will crash into Mars or break apart in about 50 million years.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Mars is about half the size of Earth and has 2 Moons. It is where the grander canyon exists, which is a huge canyon system that runs for 4000 kilometers and can be as deep as 7 kilometers. This canyon system is as long as the United States and it spans about 20% of the distance around mars.</p>
+						
+						<p>It has an average temperature of -63 degrees Celsius or -81 degrees Fahrenheit with a pretty thin atmosphere. A day on Mars is also the same as Earths taking 24.617 Earth hours, but the length of one year on Mars is equal too 687 Earth days</p>
+					</div>
+					<div id="tab14" class="tab_content">						
+						<h1>Numerical Information: Mars</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>227,943,824 km </p>
+						<h2>Imperial:</h2> 
+						<p>141,637,725 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>1.523662 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>1.524 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>86,677 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>53,858 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.808 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>3,389.5  km </p>
+						<h2>Imperial:</h2> 
+						<p>2,106.1 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.5320 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>21,296.9 km </p>
+						<h2>Imperial:</h2> 
+						<p>13,233.3</p>
+						
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>163,115,609,799 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>39,133,515,914 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>0.151 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>641,693,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>0.107 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>144,371,391 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>55,742,106 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.283 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>3.71 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>12.2 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.38G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>18,108 km/h</p>
+						<h2>Metric:</h2> 
+						<p>11,252 mph</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>1.026</p>
+						<h2>Hours:</h2> 
+						<p>24.623 </p>						
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p> -153/20 °C</p>
+						<h2>Imperial:</h2> 
+						<p> -225/70 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Carbon Dioxide (CO2), Nitrogen(N2), Argon(Ar)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Terrestrial</p>
+					</div>
+					<div id="tab15" class="tab_content">						
+						<h1>Moons Of Mars</h1>
+						<h3>2 Moons</h3> 
+						<p>Mars has two moons in orbit, Phobos and Deimos. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="top: 194600px" class="planetContent planetCenter">
+		
+			<div id="jupiter"></div>
+		
+			<div style="min-width: 460px" class="planetlabel-5">
+				<div style="font-size: 20px">Jupiter</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			
+			<div class="planettextbox-5"></div>
+			<div class="planettextboxEX-5">
+				
+				<div class="buttoneffect-5">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab17">About</a></li>
+					<li><a href="#tab18">Stats</a></li>
+					<li><a href="#tab19">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab17" class="tab_content">						
+						<h1>About Jupiter</h1>
+						<p>Jupiter is the fifth planet from our Sun. It is named for the king of ancient Roman gods. It is the biggest planet in our solar system. More than 1,300 Earths could fit inside.</p>
+						
+						<h3>How is it on Jupiter?</h3>
+						
+						<p>Jupiter not a nice place to visit. It is a giant ball of gas. There is nowhere to land. Any spacecraft or person passing through the thick clouds gets crushed and melted. On Jupiter, the pressure is so strong it compresses gas into liquid. Jupiter's atmosphere can crush a metal spaceship like a paper cup.</p>
+						
+						<p>As a gas giant Jupiter's stripes and swirls are cold, windy clouds of ammonia and water. Jupiter's Great Red Spot is a giant storm bigger than Earth. This storm has lasted hundreds of years and Jupiter's atmosphere is also poisonous. It is mostly hydrogen and helium there is dangerous radiation, too.</p>
+						
+						<p>Scientists think Jupiter's core may be a thick, super hot soup. It might be up to 50,000 degrees down there. Jupiter has its own 'mini solar system' of 50 moons. Scientists are most interested in the Galilean satellites - the four largest moons discovered by Galileo Galilei in 1610. Europa, may have an ocean under its frozen surface. Calisto's crater-pocked landscape may be the oldest in the solar system. Ganymede is the solar system's largest moon. It is bigger than Pluto and Mercury, and Io also has more volcanoes than anywhere else in the solar system.</p>
+						
+						<p>Jupiter also has three rings, but they are very hard to see and not nearly as pretty as Saturn's.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Jupiter has an insane rotational speed for its size, it takes only about 9.9 Earth Hours to completely rotate or 0.414 Earth days for 1 day on Jupiter.</p>
+						
+						<p>Jupiter, the most massive planet in our solar system with dozens of moons and an enormous magnetic field forms a kind of miniature solar system. Jupiter does resemble a star in composition, but it did not grow big enough to ignite. The planet's swirling cloud stripes are punctuated by massive storms such as the Great Red Spot, which has raged for hundreds of years.</p>
+						
+						<p>Jupiter has up to 50 confirmed moons and 17 more unconfirmed making it possibly have 67 moons in total as we know off. Gas giants like Jupiter don't have solid surfaces but Jupiter may have a solid core hidden under all that gas the size of Earth</p>
+					</div>
+					<div id="tab18" class="tab_content">						
+						<h1>Numerical Information: Jupiter</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>778,340,821 km </p>
+						<h2>Imperial:</h2> 
+						<p>483,638,564 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>5.2028870 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>5.203 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>47,002 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>29,205 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.438 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>69,911 km </p>
+						<h2>Imperial:</h2> 
+						<p>43,440.7 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>10.9733 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>439,263.8 km </p>
+						<h2>Imperial:</h2> 
+						<p>272,945.9 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>10.9733 x Earth's</p>	
+						
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>1,431,281,810,739,360 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>343,382,767,518,322 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>1321.337 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>1,898,130,000,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>317.828 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>61,418,738,571 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>23,713,907,537 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>120.414 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>24.79 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>81.3 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>2.53G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>216,720  km/h</p>
+						<h2>Metric:</h2> 
+						<p>134,664 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>5.380 x Earth's</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>0.41354</p>
+						<h2>Hours:</h2> 
+						<p>9.92496 </p>
+						<h2>By Comparison:</h2> 
+						<p>0.41467 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-148 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-234 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Hydrogen(H2), Helium(He)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Gas Giant</p>	
+
+					</div>
+					<div id="tab19" class="tab_content">						
+						<h1>Moons Of Jupiter</h1>
+						<h3>67 Moons: 17 unconfirmed</h3> 
+						<p>Jupiter has four main moons in orbit, Io, Europa, Ganymede, and Callisto. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="top: 357600px" class="planetContent planetCenter">
+		
+			<div id="saturn"></div>
+		
+			<div style="min-width: 800px" class="planetlabel-6">
+				<div style="font-size: 20px">Saturn</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			<div class="planettextbox-6"></div>
+			<div class="planettextboxEX-6">
+				
+				<div class="buttoneffect-6">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab21">About</a></li>
+					<li><a href="#tab22">Stats</a></li>
+					<li><a href="#tab23">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab21" class="tab_content">						
+						<h1>About Saturn</h1>
+						
+						<p>Saturn is the sixth planet from our Sun. It is called the 'jewel of the solar system' because of its beautiful rings. It is the second largest planet in our solar system.</p>
+						
+						<h3>How is it on Jupiter?</h3>
+						
+						<p>Saturn is a lot like Jupiter. It is made up mostly of gas, including hydrogen, helium and methane. It doesn't have a solid surface.</p>
+						
+						<p>Saturn has clouds stripes and storms like Jupiter, but they are harder to see. The clouds we see are mostly yellow and white. Trying to go into the atmosphere, the pressure just like on Jupiter would crush any object.</p>
+						
+						<p>Saturn has the most spectacular rings of any planet in the solar system. They are made of billions of small chunks of ice and rock. The chunks can be as small as a grain of sugar or as big as a house. Scientists think the rings formed when moons and other objects were torn apart by Saturn's powerful gravity. The rings would look mostly white if observed from the cloud tops of Saturn.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Surrounded by 7 main rings, Saturn is unique among the planets. All four gas giant planets have rings made of chunks of ice and rock but none are as awesome or as complicated as Saturn's. Like the other gas giants, Saturn is mostly a massive ball of hydrogen and helium.</p>
+						
+						<p>Saturn is also known for its bizarre six-sided jetstream, known as the hexagon in Saturn's north pole. Just like Jupiter, it also has an insane rotational speed which only is equal too 10.7 Earth hours for Saturn to complete a rotation and it has a large amount of moons as well with 62 detected moons.</p>
+						
+					</div>
+					<div id="tab22" class="tab_content">						
+						<h1>Numerical Information: Saturn</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>1,426,666,422 km </p>
+						<h2>Imperial:</h2> 
+						<p>886,489,415 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p> 9.53667594 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>9.537 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>34,701 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>21,562 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.324 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>58,232 km </p>
+						<h2>Imperial:</h2> 
+						<p>36,183.7 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>9.1402 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>365,882.4 km </p>
+						<h2>Imperial:</h2> 
+						<p>227,348.8  miles</p>
+						<h2>By Comparison:</h2> 
+						<p>9.1402 x Earth's</p>	
+					
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>827,129,915,150,897 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>198,439,019,647,006 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>763.594 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>568,319,000,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>95.161 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>42,612,133,285 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>16,452,636,641 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>83.543 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>10.4 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>10.4 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>1.07G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>129,924 km/h</p>
+						<h2>Metric:</h2> 
+						<p>80,731 mph</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>0.444</p>
+						<h2>Hours:</h2> 
+						<p>10.656 </p>
+						<h2>By Comparison:</h2> 
+						<p>0.445 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-178 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-288 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Hydrogen(H2), Helium(He))</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Gas Giant</p>	
+					</div>
+					<div id="tab23" class="tab_content">						
+						<h1>Moons Of Saturn</h1>
+						<h3>62 Moons: 9 unconfirmed</h3> 
+						<p>Saturn has fifty three moons in orbit, Saturn's eight largest moons include; Titan, Lapetus, Phoebe, Mimas, Enceladus, Hyperion, Pan and Tethys. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div style="top: 718000px" class="planetContent planetCenter">
+		
+			<div id="uranus"></div>
+		
+			<div class="planetlabel-7">
+				<div style="font-size: 20px">Uranus</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			<div style="top:300px" class="planettextbox-7"></div>
+			<div style="top:300px" class="planettextboxEX-7">
+				
+				<div class="buttoneffect-7">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab25">About</a></li>
+					<li><a href="#tab26">Stats</a></li>
+					<li><a href="#tab27">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab25" class="tab_content">						
+						<h1>About Uranus</h1>
+						
+						<p>Uranus is the seventh planet from our Sun. It is the third largest planet in our solar system.</p>
+						
+						<h3>How is it on Uranus?</h3>
+						
+						<p>Uranus is very cold, windy and, like most of the other planets, poisonous to humans. It is a gas planet like Jupiter, Saturn and Neptune. There is nothing to land on. The air or atmosphere gets thicker and thicker until the pressure compresses it into liquid.</p>
+						
+						<p>Seasons on Uranus last more than 20 years because the planet is tilted on its side. Scientists think it may have been hit by a planet-sized object a long time ago.</p>
+						
+						<p>Uranus is extremely cold at the cloud tops. But deeper down there is a layer of 'superheated' water, ammonia and methane. Scientists think methane shoots to the surface in huge bubbles and becomes bright clouds. The methane also absords red light and reflects the blue-green colors we see when we look at Uranus through a telescope.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Uranus is the only giant planet whose equator is nearly at right angles to its orbit. A collision with an Earth-sized object may explain the unique tilt. Nearly a twin in size to Neptune, Uranus has more methane in its mainly hydrogen and helium atmosphere than Jupiter or Saturn. This methane gives Uranus its blue tint.</p>
+						
+						<p>Uranus is so far away it is difficult to study. Scientists use math to predict what the planet is like. Uranus' 11 rings weren't discovered until 1977. And several of Uranus' 27 known moons were discovered as recently as 2003. There may be more undiscovered moons out there.</p>
+						
+						<p>Also known as an Ice giant, it is mostly made up of hot dense icy materials with alot more methane, ammonia and such giving it its blue tint. It also has a fast rotation speed for its size taking only 17 earth hours to complete 1 day on Uranus.</p>
+					</div>
+					<div id="tab26" class="tab_content">						
+						<h1>Numerical Information: Uranus</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>2,870,658,186 km </p>
+						<h2>Imperial:</h2> 
+						<p>1,783,744,300 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>19.189165 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>19.189 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>24,477 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>15,209 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.228 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>25,362 km </p>
+						<h2>Imperial:</h2> 
+						<p>15,759.2  miles</p>
+						<h2>By Comparison:</h2> 
+						<p>3.9809 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>159,354.1 km </p>
+						<h2>Imperial:</h2> 
+						<p>99,018.1 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>3.9809 x Earth's</p>	
+					
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>68,334,355,695,584 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>222,738,686,740 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>0.857 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>86,810,300,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>14.536 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>8,083,079,690 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>3,120,894,516 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>15.847 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>8.87 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>29.1 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.91G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>76,968 km/h</p>
+						<h2>Metric:</h2> 
+						<p>47,826 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>1.911 x Earth's</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>0.718 </p>
+						<h2>Hours:</h2> 
+						<p>17.23992 </p>
+						<h2>By Comparison:</h2> 
+						<p>0.72 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-216 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-357 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Hydrogen(H2), Helium(He), Methane(CH4)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Gas Giant</p>	
+					</div>
+					<div id="tab27" class="tab_content">						
+						<h1>Moons Of Uranus</h1>
+						<h3>27 Moons</h3> 
+						<p>Uranus has 27 known moons in orbit, some of the larger largest moons include; Oberon, Titania, Ariel, Umbriel, Miranda, Juliet, Puck, Cordelia, Ophelia, Bianca, Desdemona, Portia, Rosalind, Cressida and Belinda. </p>
+					</div>
+				</div>
+			</div>
+		</div>		
+		
+		<div style="top: 1123000px" class="planetContent planetCenter">
+		
+			<div id="neptune"></div>
+		
+			<div class="planetlabel-8">
+				<div style="font-size: 20px">Neptune</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			<div class="planettextbox-8"></div>
+			<div class="planettextboxEX-8">
+				
+				<div class="buttoneffect-8">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab29">About</a></li>
+					<li><a href="#tab30">Stats</a></li>
+					<li><a href="#tab31">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab29" class="tab_content">						
+						<h1>About Neptune</h1>
+						
+						<p>Most of the time Neptune is the eighth planet from our Sun. Sometimes Pluto's odd orbit brings it closer to the Sun. For the next 230 years or so, all you have to remember is that Neptune is the eighth planet. It takes a long time for these distant planets to travel around the sun.</p>
+						
+						<p>Neptune is the fourth largest planet in our solar system where about 60 Earths could fit inside it. Neptune is named for the Roman god of the sea.</p>
+						
+						<h3>How is it on Neptune?</h3>
+						
+						<p>Windy. Neptune may be the windiest planet in the solar system. Winds tear through the clouds at more than 1,200 mph (2,000 kph). The winds blew Neptune's Great Dark Spot-- a storm as big as Earth-- across the planet at 700 mph (1,100 kph). That spot has since disappeared. A new one appeared on a different part of planet. Just like the other gas giants, its atmosphere is lethal for anything trying to go deeper into its atmosphere.</p>
+						
+						<p>Neptune gets its blue color from a layer of methane gas above the clouds. Methane absorbs red light so only blue colors show up when we look at Neptune. Scientists think there might be an ocean of super hot water under Neptune's cold clouds. It does not boil away because of the incredible pressure. That pressure makes it impossible for a spacecraft or person to drop deep into the clouds.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Cold and covered by supersonic winds, Neptune is the last of the hydrogen and helium gas giants in our solar system. More than 30 times as far from the sun as Earth, the planet takes almost 165 Earth years to orbit our sun and a day length that takes 16 Earth hours to complete. In 2011 Neptune completed its first orbit since its discovery in 1846.</p>
+						
+						<p>Neptune has six rings and 13 known moons and also hosting a magnetic field 27 times more powerful then Earth's. Neptune's largest moon, Triton, gets colder than Pluto. Voyager 2 spotted geysers of nitrogen gas on Triton.</p>
+						
+						<p>It is also an Ice giant like Uranus, with a day as long as 16 Earth hours. It is also known to have a great dark spot similar too the storm on Jupiter, its is a giant storm that is as big as Earth or even bigger.</p>
+					</div>
+					<div id="tab30" class="tab_content">						
+						<h1>Numerical Information: Neptune</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>4,498,396,441 km </p>
+						<h2>Imperial:</h2> 
+						<p>2,795,173,960 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>30.069923 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>30.070 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>19,566 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>12,158 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.182 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>24,622 km </p>
+						<h2>Imperial:</h2> 
+						<p>15,299.4 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>3.8647 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>154,704.6 km </p>
+						<h2>Imperial:</h2> 
+						<p>96,129.0 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>3.8647 x Earth's</p>	
+					
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>62,525,703,987,421 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>15,000,714,125,712 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>57.723 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>102,410,000,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>17.148 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>7,618,272,763 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>2,941,431,558 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>14.980 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>11.15 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>36.6 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>1.14G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>84,816 km/h</p>
+						<h2>Metric:</h2> 
+						<p>52,702 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>2.105 x Earth's</p>
+						
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>0.671</p>
+						<h2>Hours:</h2> 
+						<p>16.11 </p>
+						<h2>By Comparison:</h2> 
+						<p>0.67 x Earth</p>							
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-214 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-353 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Hydrogen(H2), Helium(He), Methane(CH4)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Gas Giant</p>	
+					</div>
+					<div id="tab31" class="tab_content">						
+						<h3>14 Moons: 1 unconfirmed</h3> 
+						<p>Neptune has 13 known moons in orbit, some of the larger largest moons include; Triton, Nereid, and Proteus. </p>
+					</div>
+				</div>
+			</div>
+		</div>		
+		
+		<div style="top: 1474800px" class="planetContent planetCenter">
+		
+			<div id="pluto"></div>
+		
+			<div class="planetlabel-9">
+				<div style="font-size: 20px">Pluto</div>
+				<hr>
+				<div style="font-size: 14px">More Information</div>
+			</div>
+			<div class="planettextbox-9"></div>
+			<div class="planettextboxEX-9">
+				
+				<div class="buttoneffect-9">x</div>
+					
+				<ul class="tabs">
+					<li><a href="#tab33">About</a></li>
+					<li><a href="#tab34">Stats</a></li>
+					<li><a href="#tab35">Moons</a></li>
+				</ul>
+
+				<div class="tab_container">
+					<div id="tab33" class="tab_content">						
+						<h1>About Pluto</h1>
+						
+						<p>Pluto was known as the smallest planet in the solar system and the ninth planet from the sun. Today, Pluto is called a "dwarf planet." A dwarf planet orbits the sun just like other planets, but it is smaller. And a dwarf planet is so small it cannot clear other objects out of its path.</p>
+						
+						<p>Pluto is in a region called the Kuiper (KY-per) Belt. Thousands of small, icy objects like Pluto are in the Kuiper Belt.</p>
+						
+						<h3>How is it on Pluto?</h3>
+						
+						<p>Pluto is very, very cold. The temperature on Pluto is 375 to 400 degrees below zero. Pluto is so far away from Earth that scientists know very little about what it is like. Pluto is probably covered with ice. Pluto has about one-fifteenth the gravity of Earth. A person who weighs 100 pounds on Earth would weigh only 7 pounds on Pluto.</p>
+						
+						<h3>Vital Information</h3>
+						
+						<p>Discovered in 1930, Pluto was long considered our solar system's ninth planet. But after the discovery of similar intriguing worlds deeper in the distant Kuiper Belt, icy Pluto was reclassified as a dwarf planet. This new class of worlds may offer some of the best evidence about the origins of our solar system.</p>
+						
+						<p>Most planets orbit the sun in a near-circle. The sun is in the center of the circle. But Pluto does not orbit in a circle! The orbit of Pluto is shaped like an oval, and it also at one point in its orbit go inside of Neptune's orbit making it closer to the sun. During this time, Pluto's thin atmosphere made of Nitrogen, Methane and Carbon Monoxide expands and then collapses as it moves futher away from the sun again.</p>
+						
+						<p>Pluto is only 1,400 miles (2,300 kilometers) wide. That's about half the width of the United States. Pluto is slightly smaller than Earth's moon. Pluto is a binary world because both its moon Charon and Pluto orbit around a common center of mass. It takes Pluto 248 years to go around the sun. One day on Pluto is about 6 1/2 days on Earth.</p>
+					</div>
+					<div id="tab34" class="tab_content">						
+						<h1>Numerical Information: Pluto</h1>
+						<h3 class="centerH3Text">Orbit From Sun</h3>
+						<h2>Metric:</h2> 
+						<p>5,906,440,628 km </p>
+						<h2>Imperial:</h2> 
+						<p>3,670,092,055 miles</p>
+						<h2>Astronomical units:</h2> 
+						<p>39.482117 A.U. </p>
+						<h2>By Comparison:</h2> 
+						<p>39.482 x Earth </p>
+						
+						<h3 class="centerH3Text">Orbit Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>16,809 km/h </p>
+						<h2>Imperial:</h2> 
+						<p>10,444 mph</p>
+						<h2>By Comparison:</h2> 
+						<p>0.157 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Radius</h3>
+						<h2>Metric:</h2> 
+						<p>1,151 km </p>
+						<h2>Imperial:</h2> 
+						<p>715.2 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.1807 x Earth</p>
+						
+						<h3 class="centerH3Text">Equatorial Circumference</h3>
+						<h2>Metric:</h2> 
+						<p>7,231.9 km </p>
+						<h2>Imperial:</h2> 
+						<p>4,493.7 miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.1807 x Earth's</p>	
+					
+						<h3 class="centerH3Text">Volume</h3>
+						<h2>Metric:</h2> 
+						<p>6,387,259,783 km cubed </p>
+						<h2>Imperial:</h2> 
+						<p>1,532,385,114 miles cubed</p>
+						<h2>By Comparison:</h2> 
+						<p>0.006 x Earth's</p>				
+						
+						<h3 class="centerH3Text">Mass</h3>
+						<h2>Metric:</h2> 
+						<p>13,090,000,000,000,000,000,000 kg </p>
+						<h2>By Comparison:</h2> 
+						<p>0.002 x Earth's</p>							
+						
+						<h3 class="centerH3Text">Surface Area</h3>
+						<h2>Metric:</h2> 
+						<p>16,647,940 km squared </p>
+						<h2>Imperial:</h2> 
+						<p>6,427,806 square miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.033 x Earth's</p>
+						
+						<h3 class="centerH3Text">Gravity</h3>
+						<h2>Metric:</h2> 
+						<p>0.66 m/s squared </p>
+						<h2>Imperial:</h2> 
+						<p>2.2 ft/s miles</p>
+						<h2>By Comparison:</h2> 
+						<p>0.07G</p>
+						
+						<h3 class="centerH3Text">Escape Velocity</h3>
+						<h2>Metric:</h2> 
+						<p>4,428 km/h</p>
+						<h2>Metric:</h2> 
+						<p>2,751 mph</p>
+					
+						<h3 class="centerH3Text">Rotation Period</h3>
+						<h2>Earth Days:</h2> 
+						<p>6.387</p>
+						<h2>Hours:</h2> 
+						<p>153.29280 </p>					
+						
+						<h3 class="centerH3Text">Surface Temperature</h3>
+						<h2>Metric:</h2> 
+						<p>-223 °C</p>
+						<h2>Imperial:</h2> 
+						<p>-369 °F</p>							
+						
+						<h3 class="centerH3Text">Atmospheric Composition</h3>
+						<p>Carbon Monoxide (CO), Nitrogen(N2), Methane(CH4)</p>
+						<h2>By Comparison:</h2> 
+						<p>Earth's atmosphere consists mostly of N2, O2</p>	
+						
+						<h3 class="centerH3Text">Other</h3>
+						<h2>Planet Type:</h2> 
+						<p>Dwarf Planet</p>	
+					</div>
+					<div id="tab35" class="tab_content">						
+						<h1>Moons Of Pluto</h1>
+						<h3>5 Moons</h3> 
+						<p>Pluto has 5 known moons in orbit these include; Charon, Nix, Hydra, Kerberos, and Styx. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+</body>
+</html>
